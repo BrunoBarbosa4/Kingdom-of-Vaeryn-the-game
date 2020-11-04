@@ -758,7 +758,7 @@ def questEsgotoArqueiro():
               '[2] Pega um por um silenciosamente.')
         if acoes == 3:
             print('[3] Atira a bomba de fedor.\n')
-        escolha = int(input())
+        escolha = input()
 
         if type(escolha) == str and escolha == '':
             escolha = -1
@@ -1209,7 +1209,7 @@ def questProtetorArqueiro():
             input(f'{nome}: Nossa! Quem mandou eu confiar nele.')
             input(f'{nome}: Embora, eu quase o matei, agora recebi o troco.')
             input('--> Você volta para o centro da cidade.')
-            input('--> Você volta para o centro da cidade.')
+            quest3 = True
             return
         else:
             input('--> Ele defende e pisca para você.')
