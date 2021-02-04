@@ -1,40 +1,56 @@
+from time import sleep
+from os import system
 import random
+system('cls')
 
+# Formatação do texto
+none = '\033[m'
+red = '\033[1;31m'
+green = '\033[1;32m'
+yellow = '\033[1;33m'
+blue = '\033[1;34m'
+grey = '\033[1;37m'
+
+# Quests do jogador
+quest1 = False
+quest2 = False
+quest3 = False
+
+# Variáveis principais
 reino = 'Vaeryn'
 nome = ''
 classe = ''
 equipamento = ''
 
-quest1 = False
-quest2 = False
-quest3 = False
 
-
-# Prólogo
-def prologo():
-    global nome
+def criar_personagem():
     global reino
+    global nome
     global classe
     global equipamento
-    escolha = 0
 
-    print('\n', 50 * '-', 'Kingdom of Vaeryn the game', 50 * '-', '\n')
-    input('O jogo consiste em escolher números para realizar escolhas, use ENTER para prosseguir em cada fala.\n')
+    print('\n', 50 * '-', 'Kingdom of Vaeryn - The Game', 50 * '-', '\n')
+    input('O jogo consiste em escolher números para realizar escolhas, use ENTER para prosseguir em cada fala.')
 
-    input(f'--> O Reino de {reino} irá participar de uma guerra, estão recrutando guerreiros, '
-          f'arqueiros e magos de todo o reino para servir na guerra.')
+    # Início do jogo
+    input(f'\n--> O Reino de {reino} irá participar de uma guerra. '
+          'Estão recrutando guerreiros, arqueiros e magos de todo o reino para servir.')
+
+    # Decisão do nome e classe do jogador
     while nome == '':
-        nome = input('Guarda: Obrigado por vir se alistar, qual o seu nome? ')
+        nome = input(f'{grey}Guarda:{none} Obrigado por vir se alistar, qual o seu nome? ')
 
+    escolha = 0
     while escolha < 1 or escolha > 3:
-        escolha = input(f'Guarda: {nome} você é um: '
-                        f'\n[1] Guerreiro, '
-                        f'\n[2] Arqueiro '
-                        f'\n[3] Mago \n')
-        if type(escolha) == str and escolha == '':
-            escolha = -1
-        else:
+        escolha = input(f'{grey}Guarda:{none} {nome}, você é um: '
+                        '\n[1] Guerreiro'
+                        '\n[2] Arqueiro'
+                        '\n[3] Mago \n')
+
+        if (escolha == '1') or (escolha == '2') or (escolha == '3'):
             escolha = int(escolha)
+        else:
+            escolha = 0
 
         if escolha == 1:
             classe = 'Guerreiro'
@@ -45,10 +61,16 @@ def prologo():
         elif escolha == 3:
             classe = 'Mago'
             equipamento = 'bola de fogo'
+    for espera in range(6):
+        sleep(1)
+        print('.')
 
-    escolha = 0
-    input(f'--> Chega o dia do confronto, o Reino de {reino} contra o Reino Hedeby. ')
+
+def confronto():
+    system('cls')
+    input(f'--> Meses depois, chega o dia do confronto entre o Reino de {reino} e o Reino Hedeby.')
     input(f'--> Dois fortes exércitos travam um embate num vasto campo aberto, você se aproxima do exército Vaeryano.')
+    escolha = 0
     while escolha < 1 or escolha > 3:
         escolha = input(f'Soldado: {nome} já trouxe sua arma? \n'
                         f'[1] Sim, eu estou sempre pronto para a batalha.\n'
@@ -816,7 +838,7 @@ def questEsgotoArqueiro():
               '[2] Pega um por um silenciosamente.')
         if acoes == 3:
             print('[3] Atira a bomba de fedor.\n')
-        escolha = input()
+        escolha = int(input())
 
         if type(escolha) == str and escolha == '':
             escolha = -1
@@ -1291,7 +1313,7 @@ def questProtetorArqueiro():
             input(f'{nome}: Nossa! Quem mandou eu confiar nele.')
             input(f'{nome}: Embora, eu quase o matei, agora recebi o troco.')
             input('--> Você volta para o centro da cidade.')
-            quest3 = True
+            input('--> Você volta para o centro da cidade.')
             return
         else:
             input('--> Ele defende e pisca para você.')
@@ -2212,4 +2234,10 @@ def mapaMago():
     questFinal()
 
 
-prologo()
+# ---------------------------------------------------------------------------------------------------------------------
+
+
+criar_personagem()
+confronto()
+# meio_jogo()
+# final_jogo()
