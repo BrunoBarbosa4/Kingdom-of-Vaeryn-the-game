@@ -1,6 +1,7 @@
 from time import sleep
 from os import system
 import random
+
 system('cls')
 
 # Formatação do texto
@@ -11,77 +12,72 @@ yellow = '\033[1;33m'
 blue = '\033[1;34m'
 grey = '\033[1;37m'
 
-# Quests do jogador
+# Informações do jogador
+nome = ''
+classe = ''
+equipamento = ''
 quest1 = False
 quest2 = False
 quest3 = False
 
-# Variáveis principais
-reino = 'Vaeryn'
-nome = ''
-classe = ''
-equipamento = ''
+
+def validar(decisao):
+    if (decisao == '1') or (decisao == '2') or (decisao == '3') or (decisao == '4') or (decisao == '5'):
+        return int(decisao)
+    else:
+        return 0
 
 
 def alistamento():
-    global reino
     global nome
     global classe
     global equipamento
+    system('cls')
 
-    # Início do jogo
-    input(f'\n--> O Reino de {reino} irá participar de uma guerra. '
+    input('\n--> O Reino de Vaeryn irá participar de uma guerra. '
           'Estão recrutando guerreiros, arqueiros e magos de todo o reino para servir.')
 
-    # Decisão do nome e classe do jogador
     while nome == '':
-        nome = input(f'{grey}Guarda: {none}Obrigado por vir se alistar, qual o seu nome? ')
+        nome = input(f'{grey}Guarda:{none} Obrigado por vir se alistar, qual o seu nome? ')
 
-    escolha = 0
-    while escolha < 1 or escolha > 3:
-        escolha = input(f'{grey}Guarda:{none} {nome}, você é um: '
-                        '\n[1] Guerreiro'
-                        '\n[2] Arqueiro'
-                        '\n[3] Mago \n')
+    escolha_alistamento = 0
+    while escolha_alistamento < 1 or escolha_alistamento > 3:
+        escolha_alistamento = input(f'{grey}Guarda:{none} {nome}, você é um: '
+                                    '\n[1] Guerreiro'
+                                    '\n[2] Arqueiro'
+                                    '\n[3] Mago \n')
 
-        if (escolha == '1') or (escolha == '2') or (escolha == '3'):
-            escolha = int(escolha)
-        else:
-            escolha = 0
-
-        if escolha == 1:
+        escolha_alistamento = validar(escolha_alistamento)
+        if escolha_alistamento == 1:
             classe = 'Guerreiro'
             equipamento = 'espada'
-        elif escolha == 2:
+        elif escolha_alistamento == 2:
             classe = 'Arqueiro'
             equipamento = 'flecha e o arco'
-        elif escolha == 3:
+        elif escolha_alistamento == 3:
             classe = 'Mago'
             equipamento = 'bola de fogo'
 
-    for espera in range(6):
+    for espera in range(2):
         sleep(1)
         print('.')
 
 
 def guerra():
     system('cls')
+
     print('\n', 10 * '=', 'Parte 1 - A Guerra', 10 * '=')
-    input(f'--> Meses após se alistar, chega o dia do confronto entre o Reino {reino} e o Reino Hedeby.')
+    input(f'--> Meses após se alistar, chega o dia do confronto entre o Reino de Vaeryn e o Reino de Hedeby.')
     input('--> Você se aproxima do exército vaeryano enquanto os dois travam um embate no vasto campo aberto.')
 
-    escolha1 = 0    # fala com o soldado
+    escolha1 = 0  # fala com o soldado
     while escolha1 < 1 or escolha1 > 3:
         escolha1 = input(f'\n{grey}Soldado:{none} {nome}, já trouxe sua arma?'
                          '\n[1] Sim, eu estou sempre pronto para a batalha.'
                          '\n[2] Não, dê-me uma.'
                          f'\n[3] Sou um {classe} de elite, com minha {equipamento} enfrento tudo e todos.\n')
 
-        if (escolha1 == '1') or (escolha1 == '2') or (escolha1 == '3'):
-            escolha1 = int(escolha1)
-        else:
-            escolha1 = 0
-
+        escolha1 = validar(escolha1)
         if escolha1 == 1:
             print(f'\n{grey}Soldado:{none} Ótimo, como esperado de um {classe} como você.\n')
         elif escolha1 == 2:
@@ -90,17 +86,14 @@ def guerra():
             print(f'{grey}Soldado:{none} Como sempre, um orgulhoso e destemido {classe}.\n')
         sleep(2)
 
-    escolha2 = 0    # luta com o pelotão
+    escolha2 = 0  # luta com o pelotão
     while escolha2 < 1 or escolha2 > 3:
         escolha2 = input('--> O combate se inicia e aproximam-se de sua posição um pelotão de três inimigos, você:'
                          '\n[1] Luta sozinho.'
                          '\n[2] Corre para reagrupar.'
                          '\n[3] Se mistura por entre os soldados e ataca o pelotão.\n')
 
-        if (escolha2 == '1') or (escolha2 == '2') or (escolha2 == '3'):
-            escolha2 = int(escolha2)
-        else:
-            escolha2 = 0
+        escolha2 = validar(escolha2)
 
         if escolha2 == 1:
             input(f'--> Você avança para cima dos inimigos com a {equipamento}, derrotando todo o pelotão facilmente.')
@@ -109,7 +102,7 @@ def guerra():
         elif escolha2 == 3:
             input(f'--> Você se camufla por entre os soldados inimigos e ataca os três com a sua {equipamento}.')
 
-    escolha3 = 0    # encontro com Merlin
+    escolha3 = 0  # encontro com Merlin
     while escolha3 < 1 or escolha3 > 3:
         escolha3 = input('--> Enquanto seus aliados levam vantagem sobre o exército oponente, '
                          'você avista o mago Merlin em apuros e decide ajuda-lo:'
@@ -117,10 +110,7 @@ def guerra():
                          '\n[2] Lutando sozinho primeiro para depois levanta-lo.'
                          '\n[3] Pedindo ao mago que lhe cure com sua magia enquanto leva-o ao pelotão aliado.\n')
 
-        if (escolha3 == '1') or (escolha3 == '2') or (escolha3 == '3'):
-            escolha3 = int(escolha3)
-        else:
-            escolha3 = 0
+        escolha3 = validar(escolha3)
 
         if escolha3 == 1:
             input('--> Você ajuda Merlin a se recuperar e juntos travam um batalha contra os inimigos no alcance, '
@@ -132,17 +122,14 @@ def guerra():
             input('--> Você convence o mago para que o cure com magia e juntos tentam recuar para o pelotão aliado, '
                   'lutando com os inimigos no caminho.')
 
-    escolha4 = 0    # forte inimigo
+    escolha4 = 0  # forte inimigo
     while escolha4 < 1 or escolha4 > 3:
         escolha4 = input('--> Enquanto tentam reagrupar com o pelotão, você e Merlin encontram um forte inimigo. Vocês:'
                          '\n[1] Atacam o soldado-tenente desprevenido.'
                          '\n[2] Trabalham em equipe para enfrentar o forte.'
                          '\n[3] Se separam para poder enfrentar os inimigos sozinhos, pela honra.\n')
 
-        if (escolha4 == '1') or (escolha4 == '2') or (escolha4 == '3'):
-            escolha4 = int(escolha4)
-        else:
-            escolha4 = 0
+        escolha4 = validar(escolha4)
 
         if escolha4 == 1:
             input('--> Você aproveita que o soldado-tenente não viu vocês, pois enfrentava dois soldados aliados, '
@@ -154,7 +141,7 @@ def guerra():
             input('--> Você usa todo seu treinamento e habilidades e derrota os soldados do forte, '
                   'mas fica debilitado devido a uma machadada poderosa de um deles.')
 
-    escolha5 = 0    # fim da guerra
+    escolha5 = 0  # fim da guerra
     while escolha5 < 1 or escolha5 > 4:
         input('--> Com a derrota do soldado-tenente, que era o mais forte do pelotão inimigo, '
               'o exército deles ficou debilitado.')
@@ -167,10 +154,7 @@ def guerra():
                          '\n[3] Vai para mata-los, resolvendo tudo.'
                          '\n[4] Pergunta ao General aliado como prosseguir.\n')
 
-        if (escolha5 == '1') or (escolha5 == '2') or (escolha5 == '3') or (escolha5 == '4'):
-            escolha5 = int(escolha5)
-        else:
-            escolha5 = 0
+        escolha5 = validar(escolha5)
 
         if escolha5 == 1:
             input('--> Você espera que tudo seja resolvido pelos líderes, '
@@ -180,16 +164,16 @@ def guerra():
                   'e faz com que os inimigos se rendam, dando assim um fim à guerra.')
         elif escolha5 == 3:
             input('--> Você avança para cima dos inimigos mas o seu General o impede, '
-                  'pois com a morte de todo o exército o Reino Hedeby nunca aceitaria trégua.')
+                  'pois com a morte de todo o exército o Reino de Hedeby nunca aceitaria trégua.')
             input('--> Após render todos os soldados, o General põe um fim à guerra.')
         elif escolha5 == 4:
-            input('--> Você pergunta ao General como prosseguir, e ele lhe diz que basta pressiona-los, '
+            input('--> Você pergunta ao General como prosseguir, e ele lhe diz que bastava pressiona-los, '
                   'pois estão enfraquecidos e irão se render.')
             input('--> Assim acontece, e com a rendição inimiga coloca-se um fim à guerra.')
 
-    escolha6 = 0    # volta ao reino
+    escolha6 = 0  # volta ao reino
     while escolha6 < 1 or escolha6 > 3:
-        input(f'--> Você e todo o exército voltam para o Reino {reino}, sendo recepcionados pelo povo.')
+        input(f'--> Você e todo o exército voltam para o Reino de Vaeryn, sendo recepcionados pelo povo.')
         print('--> Então, o General fala:\n')
         sleep(1)
         input(f'{grey}General:{none} Com essa bela vitória de hoje, '
@@ -201,10 +185,7 @@ def guerra():
                          '\n[2] Fala que não fez mais que sua obrigação.'
                          '\n[3] Comemora com o povo a vitória da guerra.\n')
 
-        if (escolha6 == '1') or (escolha6 == '2') or (escolha6 == '3'):
-            escolha6 = int(escolha6)
-        else:
-            escolha6 = 0
+        escolha6 = validar(escolha6)
 
         if escolha6 == 1:
             input('--> Você agradeceu a todos e contou-lhes seus feitos e baixas na guerra, '
@@ -216,323 +197,294 @@ def guerra():
         elif escolha6 == 3:
             input('--> Você vai para o meio da multidão e comemora a vitória com uma festa no centro da cidade.')
 
-
-def mapaGuerreiro():
-    global nome
-    global quest1  # Taverna
-    global quest2  # Loja do ferreiro
-    global quest3  # Bosque
-
-    while (quest1 == False) or (quest2 == False) or (quest3 == False):
-        escolha = 0
-        while escolha < 1 or escolha > 3:
-            escolha = input(f'--> Segue para:\n'
-                            f'[1] Taverna.\n'
-                            f'[2] Loja do ferreiro.\n'
-                            f'[3] Bosque. \n')
-            if type(escolha) == str and escolha == '':
-                escolha = -1
-            else:
-                escolha = int(escolha)
-
-        if escolha == 1:
-            if quest1:
-                input('Moe: Eae campeão, obrigado por ter me ajudado. Quer uma bebida?')
-                input(f'{nome}: Não foi nada. Claro que quero.')
-                input(f'{nome}: está calma hoje não é?')
-                input('Moe: para mim é bom que fique assim.')
-                input('--> Você retorna à cidade.')
-            else:
-                questTavernaGuerreiro()
-        elif escolha == 2:
-            if quest2:
-                input(f'Yudi: Vejo que a Força está com você, gostei de ver. Quer comprar algo?')
-                input(f'{nome}: Não, estou apenas procurando algo para fazer.')
-                input('Yudi: Não tenho mais nenhum serviço, mas obrigado por ajudar a acabar com a marinha do forte.')
-                input(f'{nome}: Não foi nada.')
-                input('--> Você retorna à cidade.')
-            else:
-                questFerreiroGuerreiro()
-        elif escolha == 3:
-            if quest3:
-                input('--> Você avista os dois gigantes de Elbaff travando seu duelo diário.')
-                input('--> Depois de assistir um pouco, percebe que não tem mais nada para fazer ali.')
-                input('--> Você retorna à cidade.')
-            else:
-                questBosqueGigantes()
-    questFinal()
+        for espera in range(2):
+            sleep(1)
+            print('.')
 
 
-def mapaArqueiro():
-    global nome
-    global quest1  # Subúrbios
-    global quest2  # Bosque
-    global quest3  # Floresta
+def mapa_classes():
+    global quest1
+    global quest2
+    global quest3
+    system('cls')
+
+    print('\n', 10 * '=', 'Parte 2 - A Aventura', 10 * '=')
 
     while (quest1 == False) or (quest2 == False) or (quest3 == False):
-        escolha = 0
-        while escolha < 1 or escolha > 3:
-            escolha = input(f'--> Segue para:\n'
-                            f'[1] Subúrbios.\n'
-                            f'[2] Bosque.\n'
-                            f'[3] Floresta.\n')
-            if type(escolha) == str and escolha == '':
-                escolha = -1
-            else:
-                escolha = int(escolha)
+        escolha_mapa = 0
+        while escolha_mapa < 1 or escolha_mapa > 3:
+            if classe == 'Guerreiro':
+                escolha_mapa = input('--> Seguir para:'
+                                     '\n[1] Taverna.'
+                                     '\n[2] Loja do Ferreiro.'
+                                     '\n[3] Bosque.\n')
 
-        if escolha == 1:
-            if quest1:
-                input(f'--> Passa perto do esgoto, mas percebe que está tudo normal.')
-                input('--> O mendigo não está ali.')
-                input('--> Você retorna à cidade.')
-            else:
-                questEsgotoArqueiro()
-        elif escolha == 2:
-            if quest2:
-                input('--> Você aprecia a natureza. Tudo está calmo.')
-                input('--> Você retorna à cidade.')
-            else:
-                questBosqueArqueiro()
-        elif escolha == 3:
-            if quest3:
-                input('--> Você consegue caçar sem ser interrompido.')
-                input('--> Após a caça, não tem muito o que fazer na floresta.')
-                input('--> Você retorna à cidade.')
-            else:
-                questProtetorArqueiro()
-    questFinal()
+                escolha_mapa = validar(escolha_mapa)
+
+                if escolha_mapa == 1:
+                    if quest1:
+                        input(f'{green}Moe:{none} E aí {nome}, obrigado por ter me ajudado. Quer uma bebida?')
+                        input(f'{nome}: Não foi nada. Claro que quero.')
+                        input(f'{nome}: está calma hoje, né?')
+                        input(f'{green}Moe:{none} para mim é bom que fique assim.\n')
+                        input('--> Você retorna à cidade.')
+                    else:
+                        guerreiro_quest1()
+                elif escolha_mapa == 2:
+                    if quest2:
+                        input(f'{green}Yudi:{none} Vejo que a Força está com você, gostei de ver. Quer comprar algo?')
+                        input(f'{nome}: Não, estou apenas procurando algo para fazer.')
+                        input(f'{green}Yudi:{none} Não tenho mais nenhum serviço, '
+                              'mas obrigado por ajudar a acabar com a marinha do forte.')
+                        input(f'{nome}: Não foi nada.\n')
+                        input('--> Você retorna à cidade.')
+                    else:
+                        guerreiro_quest2()
+                elif escolha_mapa == 3:
+                    if quest3:
+                        input('--> Você avista os dois gigantes de Elbaff travando seu duelo diário.')
+                        input('--> Depois de assistir um pouco, percebe que não tem mais nada para fazer ali.')
+                        input('--> Você retorna à cidade.')
+                    else:
+                        guerreiro_quest3()
+
+            elif classe == 'Arqueiro':
+                escolha_mapa = input('--> Seguir para:'
+                                     '\n[1] Subúrbios.'
+                                     '\n[2] Bosque.'
+                                     '\n[3] Floresta.\n')
+
+                escolha_mapa = validar(escolha_mapa)
+
+                if escolha_mapa == 1:
+                    if quest1:
+                        input('--> Você passa perto do esgoto, mas percebe que está tudo normal.')
+                        input('--> O mendigo não está ali.')
+                        input('--> Você retorna à cidade.')
+                    else:
+                        arqueiro_quest1()
+                elif escolha_mapa == 2:
+                    if quest2:
+                        input('--> Você aprecia a natureza. Tudo está calmo.')
+                        input('--> Você retorna à cidade.')
+                    else:
+                        arqueiro_quest2()
+                elif escolha_mapa == 3:
+                    if quest3:
+                        input('--> Você consegue caçar sem ser interrompido.')
+                        input('--> Após a caça, não tem muito o que fazer na floresta.')
+                        input('--> Você retorna à cidade.')
+                    else:
+                        arqueiro_quest3()
+
+            elif classe == 'Mago':
+                escolha_mapa = input('--> Seguir para:'
+                                     '\n[1] Escola.'
+                                     '\n[2] Deserto.'
+                                     '\n[3] Floresta.\n')
+
+                escolha_mapa = validar(escolha_mapa)
+
+                if escolha_mapa == 1:
+                    if quest1:
+                        input(f'{nome}: Não tenho mais nada para fazer aqui, pois já fiz todas as aulas.\n')
+                        input('--> Você retorna à cidade.')
+                    else:
+                        mago_quest1()
+                elif escolha_mapa == 2:
+                    if quest2:
+                        input(f'{green}Morador:{none} Como vai, campeão do Desafio da Pirâmide?')
+                        input(f'{nome}: Bem. Não tem mais nenhum desafio?')
+                        input(f'{green}Morador:{none} Gosta mesmo de desafios, hein? '
+                              'Infelizmente não temos mais desafios.\n')
+                        input('--> Você retorna à cidade.')
+                    else:
+                        mago_quest2()
+                elif escolha_mapa == 3:
+                    if quest3:
+                        input('--> A floresta está calma, agora que o acampamento foi embora.')
+                        input('--> Você retorna à cidade.')
+                    else:
+                        mago_quest3()
 
 
-def mapaMago():
-    global nome
-    global quest1  # Escola
-    global quest2  # Deserto
-    global quest3  # Floresta
-
-    while (quest1 == False) or (quest2 == False) or (quest3 == False):
-        escolha = 0
-        while escolha < 1 or escolha > 3:
-            escolha = input(f'--> Segue para:\n'
-                            f'[1] Escola.\n'
-                            f'[2] Deserto.\n'
-                            f'[3] Floresta. \n')
-            if type(escolha) == str and escolha == '':
-                escolha = -1
-            else:
-                escolha = int(escolha)
-
-        if escolha == 1:
-            if quest1:
-                input(f'{nome}: Não tenho mais nada para fazer aqui, pois já fiz todas as aulas.')
-                input('--> Você retorna à cidade.')
-            else:
-                questRogueArtsMago()
-        elif escolha == 2:
-            if quest2:
-                input('Morador: Como vai campeão do desafio da pirâmide?')
-                input(f'{nome}: Bem. Não tem mais nenhum desafio?')
-                input('Morador: Gosta mesmo de desafios, hein? Infelizmente não temos mais desafios.')
-                input('--> Você retorna à cidade.')
-            else:
-                questDesertoMago()
-        elif escolha == 3:
-            if quest3:
-                input('A floresta está calma, agora que o acampamento foi embora')
-                input('--> Você retorna à cidade.')
-            else:
-                questTorneioMago()
-    questFinal()
-
-
-def questTavernaGuerreiro():
-    global nome
-    global classe
-    global reino
+def guerreiro_quest1():
     global quest1
 
-    input('--> Na taverna do Moe está tudo pacato, pos era um dia normal.')
+    input('--> Na taverna do Moe está tudo pacato, um dia normal como qualquer outro.')
     input('--> Você se aproxima do balcão, e ele lhe pergunta:')
-    escolha = 0
-    while escolha < 1 or escolha > 3:
-        escolha = input(f'Moe: Olá {nome}, quer tomar hidromel?\n'
-                        f'[1] Claro aqui as três moedas.\n'
-                        f'[2] Não.\n'
-                        f'[3] Não tenho dinheiro, ajude seu amigo. \n')
-        if type(escolha) == str and escolha == '':
-            escolha = -1
-        else:
-            escolha = int(escolha)
 
-    if escolha == 1:
-        input(f'Moe: Muito bem rapaz, saindo o melhor hidromel da região.')
-        input(f'Moe: Eu ouvi falar de você, o destemido {classe} de {reino}.')
-        input(f'{nome}: que isso, estava apenas ajudando o meu reno. O nosso reino!')
-        input('Moe: gosto dessa empolgação, meu rapaz!')
-    elif escolha == 2:
-        input('MOe: Tudo bem, então veio apenas jogar conversa fora...')
-        input(f'Moe: Suas histórias são verdadeiras? O {classe} que derrotou o gigante bárbaro!')
-        input('--> Quando você abre sua boca para responder...')
-    elif escolha == 3:
-        input('Moe: Ah... Entendo... Deixe-me ver... O movimento está fraco mesmo, aqui está!')
-        input(f'{nome}: Muito obrigado!')
-        input(f'Moe: É apenas um agradecimento por um de nosso mais bravos guerreiros')
+    escolha1 = 0    # conversa com Moe
+    while escolha1 < 1 or escolha1 > 3:
+        escolha1 = input(f'{green}Moe:{none} Olá {classe}, quer tomar hidromel?'
+                         '\n[1] Claro, aqui as três moedas!'
+                         '\n[2] Não.'
+                         '\n[3] Não tenho dinheiro, ajude seu amigo.\n')
 
-    input('--> Entram na taverna a oportunista e salafrária gangue cascalho.')
-    escolha = 0
-    while escolha < 1 or escolha > 3:
-        escolha = input(f'--> Eles não percebem quem você é e começam uma discussão com Moe,\n'
-                        'mas você espera, pois:\n'
-                        f'[1] Espera que eles digam algo importante.\n'
-                        f'[2] Mou não gosta de violência desnecessária.\n'
-                        f'[3] Percebe que eles estão irritados pois perderam uma briga. \n')
-        if type(escolha) == str and escolha == '':
-            escolha = -1
-        else:
-            escolha = int(escolha)
+        escolha1 = validar(escolha1)
 
-    if escolha == 1:
-        input('--> Após alguns segundos de discussão, um deles diz:')
-        input('--> Capanga da gangue: Entramos em brigas difíceis recentemente, agora estamos sem dinheiro,\n'
-              '\tpor isso estamos recorrendo a assaltos e outras vigarices.')
-        input('Outro capanga da gangue: É, queremos o seu dinheiro, anda logo!')
-    elif escolha == 2:
-        input('--> Vendo que eles estavam de cabeça quente, resolveu não entrar na discussão,\n pois Mou não'
-              '\tgosta de violência em sua taverna, embora de vez em quando é impossível não acontecer...')
-        input('Capanga da gangue: Estamos com pressa, vai logo e entrega o dinheiro para a gente!')
-    elif escolha == 3:
-        input('Capanga da gangue: a alguns minutos, brigamos com os vagos e perdemos uma grana agora passa\n'
-              '\tO dinheiro pra cá.')
+        if escolha1 == 1:
+            input(f'{green}Moe:{none} Muito bem rapaz, saindo o melhor hidromel da região.')
+            input(f'{green}Moe:{none} Eu ouvi falar de você, o destemido {classe} de Vaeryn.')
+            input(f'{nome}: Que isso, eu estava apenas servindo o meu reino. O NOSSO reino!')
+            input(f'{green}Moe:{none} Gosto dessa empolgação, meu rapaz!')
+        elif escolha1 == 2:
+            input(f'{green}Moe:{none} Tudo bem, então veio apenas para jogar conversa fora, hein?')
+            input(f'{green}Moe:{none} Suas histórias são verdadeiras? O {classe} que derrotou os hedebyrianos?')
+            input('--> Quando você abre sua boca para responder...')
+        elif escolha1 == 3:
+            input(f'{green}Moe:{none} Ah, entendo... Deixe-me ver... O movimento está fraco mesmo, aqui está.')
+            input(f'{nome}: Muito obrigado!')
+            input(f'{green}Moe:{none} É apenas um agradecimento por um de nossos mais bravos guerreiros.')
 
-    escolha = 0
-    while escolha < 1 or escolha > 4:
-        escolha = input('--> Sabendo que eles vão assaltar a taverna de Moe, você decide impedi-los:\n'
-                        '[1] Chega atacando todos os cinco.\n'
-                        '[2] Se reúne com os demais clientes para ajudar Moe.\n'
-                        '[3] Aproveita que não prestaram atenção em você e ataca pelas costas. \n'
-                        '[4] Intimida-os.\n')
-        if type(escolha) == str and escolha == '':
-            escolha = -1
-        else:
-            escolha = int(escolha)
+    escolha2 = 0    # escutar a gangue
+    while escolha2 < 1 or escolha2 > 3:
+        input('--> De repente, entra na taverna a oportunista gangue Cascalho.')
 
-    if escolha == 1:
-        input('--> Você não tem medo de simples gangsters e parte com tudo o que tem para cima deles.')
-        print('--> Enfia sua espada com força nas costas do primeiro.')
-        print('--> Um deles atira com sua garrucha, mas você se abaixa antes, e o chuta incapacitando-o.')
-        input(
-            '--> Outro te segura pelas costas te imobilizando, e outro te soca algumas vezes, mas você  \nconsegue se soltar e jogar quem o segurava em cima do outro.')
-        input(
-            '--> Percebendo que a situação encontrava-se desfavorável, \no último membro da gangue deu um tiro em Moe e fugiu rapidamente da taverna com o dinheiro.')
-    elif escolha == 2:
-        input('--> Você se reúne com os outros clientes, que também são fortes e partem para cima da gangue.')
-        input('--> Gangsters: Acham mesmo que quatro fracotes e um guerreiro irá nos parar?')
-        input(
-            '--> Você corre arremessando sua espada no crânio de um, e socando o outro num ponto vital, desmaiando-o.')
-        input('--> Três dos clientes espancam mais um membro da gangue.')
-        input('--> Você corre para nocautear outro que golpeava um cliente, com ele nocauteado só faltou um.')
-        input(
-            '--> Porém o último percebendo que não acabaria bem a briga, pegou o dinheiro atirou em Moe e fugiu para a sede da gangue.')
-    elif escolha == 3:
-        input(
-            '--> Você se aproxima nas costas, desferindo um corte horizontal acertando três inimigos que estavam perto.')
-        input('--> Os dois inimigos restantes ficam surpresos com a emboscada.')
-        input('--> Um deles atira em Moe e sai correndo da taverna.')
-        input('--> O outro engata um embate com você sendo derrotado rapidamente.')
-    elif escolha == 4:
-        input('--> Você se aproxima da gangue e mando-os que saiam da taverna antes que tudo acabe pior.')
-        input('--> Mas quatro deles partem para a briga com você, te atrasando enquanto um rouba, atira em Moe e foge.')
-        input(
-            '--> Você espanca os quatro em uma luta corpo a corpo, mas um deles consegue a fuga para a sede da gangue.')
+        escolha2 = input('--> Eles não percebem quem você é e começam uma discussão com Moe, mas você espera pois:'
+                         '\n[1] Espera que eles digam algo importante.'
+                         '\n[2] Moe não gosta de violência desnecessária.'
+                         '\n[3] Percebe que eles estão irritados por terem perdido uma briga.\n')
 
-    escolha = 0
-    while escolha < 1 or escolha > 2:
-        escolha = input(f'--> Após a fuga de um dos integrantes, você:\n'
-                        f'[1] Corre atrás do meliante.\n'
-                        f'[2] Socorre Moe que foi baleado.\n')
-        if type(escolha) == str and escolha == '':
-            escolha = -1
-        else:
-            escolha = int(escolha)
+        escolha2 = validar(escolha2)
 
-    if escolha == 1:
-        input('--> Corre atrás do meliante, porém ele estava muito a frente.')
-        input('--> Para priorar, em um cruzamento precisa esperar até que uma carroça passe, perdendo-o de vista.')
-    elif escolha == 2:
-        input(
-            '--> Vai socorrer Moe que foi baleado, mas quando você se aproxima dele fica sabendo que o tiro passou raspando em seu ombro.')
-        input(
-            f'Moe: {nome} eu estou bem, essa gangue nunca tinha sido violenta desse modo, mesmo me roubando as vezes.')
-        input('--> Moe: Nunca dispararam contra mim. Agora corra, pegue ele.')
-        input('--> Moe: me vingue por favor, para que esse inferno de gangue acabe para sempre.')
-        input(
-            '--> Você vai atrás do ladrão como um espírito de vingança, mas não sabe onde ele foi, pois ele partiu muito a frente.')
+        if escolha2 == 1:
+            input('--> Após alguns segundos de discussão, um deles diz:')
+            input(f'{red}Capanga da gangue:{none} Entramos em brigas difíceis recentemente, '
+                  'agora estamos sem dinheiro e por isso estamos recorrendo a assaltos e outras vigarices.')
+            input(f'{red}Outro capanga da gangue:{none} É, queremos o seu dinheiro, anda logo!')
+        elif escolha2 == 2:
+            input('--> Percebendo que eles eram cabeça-quente, você resolveu não entrar na discussão '
+                  'pois o Moe não gosta de violência em sua taverna.')
+            input('--> (Mesmo que, de vez em quando, é impossível não acontecer...), você pensou.')
+            input(f'{red}Capanga da gangue:{none} Estamos com pressa, vai logo e entrega o dinheiro pra gente!')
+        elif escolha2 == 3:
+            input(f'{red}Capanga da gangue:{none} Há alguns minutos, brigamos com os Vagos e perdemos uma grana,'
+                  ' então passa logo o dinheiro pra cá.')
 
-    escolha = 0
-    while escolha < 1 or escolha > 3:
-        escolha = input(
-            f'--> Perdido, sem saber onde ele foi, você se aproxima de um aventureiro que estava no cruzamento e diz:\n'
-            f'[1] Aventureiro você viu aonde foi aquele ladrão?.\n'
-            f'[2] Você pode me levar até o esconderijo da gangue cascalho? Lhe darei 10 moedas.\n'
-            f'[3] Me leve até a sede da gangue cascalho, estou com pressa, vamos! \n')
-        if type(escolha) == str and escolha == '':
-            escolha = -1
-        else:
-            escolha = int(escolha)
+    escolha3 = 0    # reagindo ao assalto
+    while escolha3 < 1 or escolha3 > 4:
+        escolha3 = input('--> Sabendo que eles vão assaltar a taverna de Moe, você decide impedi-los:'
+                         '\n[1] Atacando os cinco capangas ao mesmo tempo.'
+                         '\n[2] Se reunindo com os demais clientes para ajudar o Moe.'
+                         '\n[3] Aproveitando que não prestaram atenção em você e atacando-os pelas costas.'
+                         '\n[4] Intimidando-os.\n')
 
-    if escolha == 1:
-        input('Aventureiro: Vi sim, ele foi pela esquerda subindo o morro.')
-        input('Aventureiro: Acho que ja passei perto da sede dessa gangue, fica em cima desse morro.')
-        input('--> Você agradece e corre até a sede')
-    elif escolha == 2:
-        input(f'Aventureiro: Claro, siga-me.')
-        input('--> Você segue ele e logo chegam a sede')
-    elif escolha == 3:
-        input(f'Aventureiro: Vou te ajudar nessa {nome}, vamos.')
-        input('Aventureiro: Aconteceu alguma coisa?')
-        input('--> Você conta o caso para ele e chegam até a sede.')
+        escolha3 = validar(escolha3)
 
-    escolha = 0
-    print('--> Na sede da gangue há três ladrões, um deles era o que furtou Moe, também estava o líder Evan.')
-    while escolha < 1 or escolha > 3:
-        print('--> Você estava contra quatro membros da gangue.')
-        escolha = input(f'--> Então você:\n'
-                        f'[1] Fala a Evan que veio barganhar, para que ele devolva o dinheiro e ninguém se machucará.\n'
-                        f'[2] Parte para a briga.\n'
-                        f'[3] Corre para chamar reforços. \n')
-        if type(escolha) == str and escolha == '':
-            escolha = -1
-        else:
-            escolha = int(escolha)
+        if escolha3 == 1:
+            input('--> Você não tem medo de simples gangsters e parte com tudo o que tem para cima deles.')
+            input(f'--> Você enfia sua {equipamento} com força nas costas do primeiro capanga.')
+            input('--> Um deles atira com sua garrucha, mas você se abaixa antes e o chuta, incapacitando-o.')
+            input('--> Um capanga te segura pelas costas e te imobiliza enquanto outro te socava algumas vezes, '
+                  'mas você consegue se soltar e jogar quem o segurava em cima dele.')
+            input('--> Percebendo que a situação encontrava-se desfavorável, '
+                  'o último membro da gangue deu um tiro em Moe e fugiu rapidamente da taverna com o dinheiro.')
+        elif escolha3 == 2:
+            input('--> Você se reúne com os outros clientes e partem para cima da gangue.')
+            input(f'--> {red}Gangsters:{none} Acham mesmo que quatro fracotes e um guerreiro irá nos parar?')
+            input(f'--> Você corre e arremessa sua {equipamento} no crânio do primeiro capanga, '
+                  f'partindo para o próximo desferindo socos nos pontos vitais e desmaiando-o.')
+            input('--> Três dos clientes espancam mais um membro da gangue.')
+            input('--> Você corre para nocautear o capanga que golpeava o quarto cliente.')
+            input('--> Com ele nocauteado, só restava um.')
+            input('--> Porém, ao perceber que estava em desvantagem, o último capanga pegou o dinheiro, '
+                  'atirou em Moe e fugiu para o esconderijo da gangue.')
+        elif escolha3 == 3:
+            input(f'--> Você se aproxima por trás e balançada sua {equipamento} horizontalmente, '
+                  'acertando três capangas consecutivamente.')
+            input('--> Os dois inimigos restantes ficam surpresos com a emboscada.')
+            input('--> Um deles atira em Moe e sai correndo da taverna com o dinheiro.')
+            input('--> Você tenta ir atrás dele, mas o outro capanga lhe impede.')
+            input('--> Você derrota o último capanga sem muitas dificuldades.')
+        elif escolha3 == 4:
+            input('--> Você se aproxima da gangue e manda-os saírem da taverna, antes que aquilo acabasse pior.')
+            input('--> Quatro deles partem pra cima de você, enquanto o outro roubava a taverna.')
+            input('--> Você espanca-os numa luta corpo a corpo, mas um deles foge com o dinheiro e atira em Moe.')
 
-    if escolha == 1:
-        input('Evan: Haha. Vem em nossa sede arrumar confusão, mas agora quer barganhar?')
-        input('Evan: A única coisa que vai acontecer aqui é que irá apanhar.')
-        input('--> Então eles fecham um círculo em volta de você, mas você os golpeia com um ciclone de espadadas.')
-        input('--> Consegue ferir gravemente três capangas.')
-        input('--> Evan e o outro sobrevivente desferem facas em seu braço.')
-        input(
-            '--> Você apara seus golpes e os finaliza com um corte horizontal na garganta de ambos que estavam lado a lado.')
-    elif escolha == 2:
-        input(
-            '--> Você foca os golpes em Evan assassinando-o rapidamente, com a morte do líder, os quatro capangas ficam abalados.')
-        input('--> Você aproveita o vacilo de dois deles, os finaliza.')
-        input(
-            '--> O último tenta com um esforço desesperado em lhe atacar mas você apara o ataque e remove sua cabeça.')
-    elif escolha == 3:
-        input('--> Você tenta correr para chamar reforços, mas fica cercado pela gangue.')
-        input('Evan: Você percebeu que está em desvantagem e quer fugir, não vai a lugar algum.')
-        input('--> Você luta com eles aparando golpes e contra atacando, até sobrar somente Evan.')
-        input('--> Você o acerta um chute quebrando a defesa dele e o jogando ao chão, finalizando-o rapidamente.')
+    escolha4 = 0    # fuga do último capanga
+    while escolha4 < 1 or escolha4 > 2:
+        escolha4 = input('--> Após a fuga de um dos capangas, você:'
+                         '\n[1] Corre atrás dele.'
+                         '\n[2] Socorre Moe que foi baleado.\n')
 
-    input('--> Com toda a gangue derrotada, você leva o dinheiro a Moe e volta ao centro da cidade.')
+        escolha4 = validar(escolha4)
+
+        if escolha4 == 1:
+            input('--> Você corre atrás do capanga, porém ele estava muito à frente.')
+            input('--> Para piorar, você perde-o de vista após ser parado por uma carroça que cruzava a rua.')
+        elif escolha4 == 2:
+            input('--> Você vai socorrer Moe, mas quando se aproxima vê que o tiro passou raspando em seu ombro.')
+            input(f'{green}Moe:{none} Eu estou bem {nome}, a gangue Cascalho nunca tinha sido violenta dessa maneira, '
+                  'eles devem estar realmente desesperados para dispararem contra mim.')
+            input(f'{green}Moe:{none} Agora corra {nome}, pegue o último deles.\n')
+            input('--> Antes de você sair da taverna, Moe implora para você:')
+            input(f'{green}Moe:{none} Coloque um fim nisso, por favor! Que esse inferno de gangue acabe para sempre.\n')
+            input('--> Você vai atrás do ladrão, mas não sabe onde ele foi, pois ele partiu muito antes.')
+
+    escolha5 = 0    # encontro com o Aventureiro
+    while escolha5 < 1 or escolha5 > 3:
+        escolha5 = input('--> Perdido, sem saber onde ele foi, '
+                         'você se aproxima de um aventureiro que estava no cruzamento e diz:'
+                         '\n[1] Aventureiro, você viu para onde foi aquele ladrão?'
+                         '\n[2] Você pode me levar até o esconderijo da gangue Cascalho? Lhe darei 10 moedas.'
+                         '\n[3] Me leve até esconderijo da gangue Cascalho agora, estou com pressa! \n')
+
+        escolha5 = validar(escolha5)
+
+        if escolha5 == 1:
+            input(f'{blue}Aventureiro:{none} Vi sim, ele foi pela esquerda, subindo o morro.')
+            input(f'{blue}Aventureiro:{none} Acho que já passei perto do esconderijo dele, fica em cima desse morro.\n')
+            input('--> Você agradece e corre até o esconderijo.')
+        elif escolha5 == 2:
+            input(f'{blue}Aventureiro:{none} Claro, siga-me.\n')
+            input('--> Você segue ele e logo chegam ao esconderijo.')
+        elif escolha5 == 3:
+            input(f'{blue}Aventureiro:{none} Vou te ajudar nessa, {classe}. Vamos.')
+            input(f'{blue}Aventureiro:{none} Aconteceu alguma coisa?\n')
+            input('--> Você conta o caso para ele e chegam até o esconderijo.')
+
+    escolha6 = 0    # chegada ao esconderijo
+    while escolha6 < 1 or escolha6 > 3:
+        input('--> No esconderijo da gangue haviam quatro ladrões, sendo um o que furtou Moe, e o líder deles, Evan.')
+        input('--> Você estava sozinho contra cinco inimigos.')
+
+        escolha6 = input('--> Você então:'
+                         '\n[1] Fala a Evan que veio barganhar, para que ele devolva o dinheiro e ninguém se machucará.'
+                         '\n[2] Parte para a briga.'
+                         '\n[3] Corre para chamar reforços.\n')
+
+        escolha6 = validar(escolha6)
+
+        if escolha6 == 1:
+            input(f'{red}Evan:{none} Haha, que engraçado... Você vem até a nossa sede para arrumar confusão, '
+                  'mas agora quer barganhar?')
+            input(f'{red}Evan:{none} A única coisa que vai acontecer aqui é a sua morte.\n')
+            input('--> Os capangas então fecham um círculo em volta de você, '
+                  'mas você os golpeia com um ciclone de espadadas.')
+            input('--> Você consegue ferir gravemente três capangas.')
+            input('--> Evan e o outro capanga desferem facas no seu braço direito.')
+            input('--> Você apara as lâminas e os finaliza com um corte horizontal na garganta de ambos.')
+        elif escolha6 == 2:
+            input('--> Você vira-se para Evan e o assassina rapidamente.')
+            input('--> Com a morte do líder, os quatro capangas ficam abalados.')
+            input('--> Você aproveita o choque de dois deles e os finaliza.')
+            input('--> O último capanga tenta desesperadamente lhe atacar, '
+                  'mas você defende-se do ataque e corta sua cabeça.')
+        elif escolha6 == 3:
+            input('--> Você corre para chamar reforços, mas é cercado pela gangue.')
+            input(f'{red}Evan:{none} Você percebeu que está em desvantagem e quer fugir? Você não irá a lugar algum.')
+            input('--> Você luta contra eles aparando e contra-atacando, até sobrar somente Evan.')
+            input('--> Você quebra a defesa dele com poderoso chute, jogando-o no chão e finalizando-o rapidamente.')
+
+        input('--> Com toda a gangue derrotada, você devolve o dinheiro ao Moe e volta ao centro da cidade.')
+
     quest1 = True
 
 
-def questFerreiroGuerreiro():
+def guerreiro_quest2():     # TODO - Continuar daqui
     global nome
     global classe
-    global reino
     global quest2
 
     input('--> Chegando no ferreiro Yudi, você tenta negociar uma espada, porque a sua não é a das melhores.')
@@ -725,10 +677,9 @@ def questFerreiroGuerreiro():
     quest2 = True
 
 
-def questBosqueGigantes():
+def guerreiro_quest3():
     global nome
     global classe
-    global reino
     global quest3
 
     input('--> Ao chegar no bosque você encontra uma rachadura enorme no solo, parecia um golpe de uma espada gigante')
@@ -873,7 +824,7 @@ def questBosqueGigantes():
     quest3 = True
 
 
-def questEsgotoArqueiro():
+def arqueiro_quest1():
     global nome
     global quest1
     escolha = 0
@@ -1053,7 +1004,7 @@ def questEsgotoArqueiro():
     quest1 = True
 
 
-def questBosqueArqueiro():
+def arqueiro_quest2():
     global nome
     global classe
     global reino
@@ -1259,7 +1210,7 @@ def questBosqueArqueiro():
     quest2 = True
 
 
-def questProtetorArqueiro():
+def arqueiro_quest3():
     global nome
     global quest3
 
@@ -1460,7 +1411,7 @@ def questProtetorArqueiro():
     quest3 = True
 
 
-def questRogueArtsMago():
+def mago_quest1():
     global nome
     global quest1
     aulasFeitas = 0
@@ -1668,7 +1619,7 @@ def salaPocoes(jaFez):
     return 1
 
 
-def questDesertoMago():
+def mago_quest2():
     global nome
     global quest2
 
@@ -1997,7 +1948,7 @@ def jogo(nomeOponente):
         return False
 
 
-def questTorneioMago():
+def mago_quest3():
     global nome
     global quest3
     competidores = ['Merlin', 'Aleneus', 'Zadel', 'Azahr', 'Erius', 'Eneel', 'Babidi', 'Lopianne', 'Strange',
@@ -2048,17 +1999,16 @@ def questTorneioMago():
     quest3 = True
 
 
-def questFinal():
+def quest_final():
     global nome
-    global reino
 
     input('--> No centro da cidade, você vê um pelotão de soldados de seu reino.')
-    input('--> Eles estavam correndo rumo à montanha Tallhill do reino Hedeby.')
+    input('--> Eles estavam correndo rumo à montanha Tallhill do reino de Hedeby.')
     input('--> Um guarda vem em sua direção.')
     input(
         f'Guarda: {nome}, você foi uma peça fundamental na nossa última guerra, e estamos precisando da sua ajuda novamente.')
     input(
-        'Guarda: com a rendição do reino Hedeby, eles passaram por uma fase de grande vexame, então decidiram usar tudo\n'
+        'Guarda: com a rendição do reino de Hedeby, eles passaram por uma fase de grande vexame, então decidiram usar tudo\n'
         '\to que tem para um último confronto contra nós.')
     input('Guarda: venha nos ajudar, siga o pelotão, para receber mais informações do comandante.')
     input('--> Você segue o pelotão e o comandante diz:')
@@ -2163,14 +2113,14 @@ def dragaoLiberto():
             '--> Esse ataque consiste em avançar em três frentes, uma liderada pelo comandante, outra por você e a última por Merlin.')
         input('--> O pelotão de Merlin focará no dragão, imobilizando-o.')
         input('--> Enquanto ele está imobilizado, o pelotão do comandante irá derrubá-lo e prendê-lo no chão.')
-        input('--> Durante isso, a sua frente eliminará todo o exército Hedeby.')
+        input('--> Durante isso, a sua frente eliminará todo o exército de Hedeby.')
         sorte = random.randint(1, 10)
         if sorte <= 5:  # 50% de chance (final bom)
             input('--> O dragão é preso ao chão, sem chances de escapar, e todos os outros inimigos são mortos.')
             input('--> Vocês atacam o dragão que enfim falece, sendo decretado um fim definitivo a esa guerra.')
             input('--> Seu exército volta para a cidade comemorando o fim da guerra, e do dragão.')
             input(
-                f'--> Vocês são considerados heróis de {reino}, pois agora as próximas gerações não precisarão se preocupar como retorno deste monstro.')
+                f'--> Vocês são considerados heróis de Vaeryn, pois agora as próximas gerações não precisarão se preocupar como retorno deste monstro.')
         elif sorte <= 8:  # 30% de chance (final médio)
             input(
                 '--> Merlin e seus homens infelizmente não conseguem segurar o dragão para que o pelotão do comandante derrubasse o dragão.')
@@ -2178,7 +2128,7 @@ def dragaoLiberto():
             input('--> Com essa falha no plano, o dragão consegue escapar voando para longe.')
             input('--> Seu exército volta para a cidade e avisa todos do reino que Hedeby não é mais um problema.')
             input(
-                f'--> Porém o dragão está a solta e poderá retornar à {reino} a qualquer momento, cedo ou tarde, todos devem estar preparados.')
+                f'--> Porém o dragão está a solta e poderá retornar à Vaeryn a qualquer momento, cedo ou tarde, todos devem estar preparados.')
         else:  # 20% de chance (final ruim)
             input(
                 '--> Merlin e seus homens infelizmente não conseguem segurar o dragão para que o pelotão do comandante derrubasse o dragão.')
@@ -2186,7 +2136,7 @@ def dragaoLiberto():
                 '--> Além disso, houve outro problema, pois você e sua tropa encontram muita resistência dos hedebyrianos.')
             input(
                 '--> Com o plano sendo totalmente falho, e o dragão tendo apoio da tropa de seus salvadores, ele derrota todo o seu exército.')
-            input(f'--> É decretado um fim à guerra, o reino Hedeby vence e assola completamente o reino de {reino}.')
+            input(f'--> É decretado um fim à guerra, o reino de Hedeby vence e assola completamente o reino de Vaeryn.')
             input('--> E agora, fortalecidos, partem para derrotar outros reinos.')
     elif escolha == 2:
         input(
@@ -2218,7 +2168,7 @@ def dragaoSelado():
         input(f'--> Vocês decidem poupá-los pois eles estão em menor número, já enfraquecidos e com o plano arruinado.')
         input(f'--> Porém com as condições:')
         input(f'--> I - Que os hedebyrianos aceitem a derrota na guerra;')
-        input(f'--> II - Não ataquem o reino de {reino};')
+        input(f'--> II - Não ataquem o reino de Vaeryn;')
         input(f'--> III - Não tentem libertar o dragão novamente.')
         input('--> Eles concordam e agradecem pela compaixão.')
         input('--> Cada exército volta a seu reino.')
@@ -2239,13 +2189,14 @@ def dragaoSelado():
 print('\n', 50 * '-', 'Kingdom of Vaeryn - The Game', 50 * '-', '\n')
 input('O jogo consiste em escolher números para realizar escolhas, use ENTER para prosseguir em cada fala.')
 
+# Criação do personagem
 alistamento()
 
+# Início do jogo
 guerra()
 
-if classe == 'Guerreiro':
-    mapaGuerreiro()
-elif classe == 'Arqueiro':
-    mapaArqueiro()
-elif classe == 'Mago':
-    mapaMago()
+# Divisão das quests
+mapa_classes()
+
+# Final do jogo
+quest_final()
