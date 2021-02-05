@@ -2249,6 +2249,3 @@ elif classe == 'Arqueiro':
     mapaArqueiro()
 elif classe == 'Mago':
     mapaMago()
-
-# meio_jogo()
-# final_jogo()
