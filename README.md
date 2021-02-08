@@ -1,11 +1,18 @@
-# Kingdom-of-Vaeryn-the-game
-Este é o jogo que fizemos para a APS (Atividades Práticas Supervisionadas) do 2° semestre de CC.
+# Kingdom of Vaeryn - The Game
+Este jogo foi feito para a matéria de Atividades Práticas Supervisionadas durante o segundo semestre do curso de ciência da computação da Universidade Paulista de Ribeirão Preto.
 
-# O jogo:
-O jogo de de texto com tomadas de decisão.
-Inicialmente, começa com o prólogo onde é apresentado o mundo.
-Depois, você precisa fazer três quests que vão depender da sua classe.
-Quando terminar as quests, você joga a missão final e pode decidir o futuro do Reino de Vaeryn!]
+## O jogo
+É por texto e com tomadas de decisões. Inicialmente, o prólogo do jogo apresenta o mundo.
 
-# Obs
-O jogo foi escrito em python 3.8
+Após, as quests seguintes irão depender da classe escolhida pelo jogador; quando terminá-las, será possível jogar a missão final e assim decidir o futuro do Reino de Vaeryn.
+
+###### Observações: O jogo foi escrito na linguagem de programação Python 3.8 através da IDE PyCharm 2020.2.3
+
+___
+
+### Integrantes
+- Bruno de Carvalho Barbosa (F315AG-2)
+- Gabriel Pavan de Moura    (N58247-2)
+- Guilherme Santos da Costa (F1745D-4)
+- Júlia de Souza Reyde      (F257GE-0)
+- Leonardo F. do Nascimento (N5812D-6)
